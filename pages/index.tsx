@@ -1,18 +1,22 @@
 import clsx from "clsx";
 import Head from "next/head";
+import { useEffect } from "react";
 import { Item } from "../src/components/Item";
 import { List } from "../src/components/List";
 import { Title } from "../src/components/Title";
+import { useItemsContext } from "../src/context/items";
 import styles from "../styles/Home.module.css";
 
-const items = [
-  { text: "Checked item", date: 1668792279974, checked: true },
-  { text: "Checked item", date: 1668792297706, checked: true },
-  { text: "Unchecked item", date: 1668792298706, checked: false },
-  { text: "Unchecked item", date: 1668792299706, checked: false },
-];
-
 export default function Home() {
+  const { items, addItem } = useItemsContext();
+
+  useEffect(() => {
+    addItem({ text: "Checked item", date: 1668792279974, checked: true });
+    addItem({ text: "Checked item", date: 1668792297706, checked: true });
+    addItem({ text: "Unchecked item", date: 1668792298706 });
+    addItem({ text: "Unchecked item" });
+  }, []);
+
   return (
     <div className="bg-indigo-50 text-indigo-900">
       <Head>
