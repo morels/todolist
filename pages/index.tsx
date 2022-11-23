@@ -20,11 +20,14 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Title>TODO List</Title>
-        {items.map(({ text, checked }, i) => (
-          <Item key={`${i}${text}`} checked={checked}>
-            {text}
-          </Item>
+        <Title>Hey, what's up?</Title>
+        {items.map(({ text, checked }, i, items) => (
+          <Item
+            key={`${i}${text}`}
+            checked={checked}
+            className={i < items.length ? "mb-3" : ""}
+            text={text}
+          />
         ))}
       </main>
 
