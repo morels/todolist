@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import Head from "next/head";
 import { Item } from "../src/components/Item";
+import { List } from "../src/components/List";
 import { Title } from "../src/components/Title";
 import styles from "../styles/Home.module.css";
 
@@ -29,14 +30,16 @@ export default function Home() {
         )}
       >
         <Title>Hey, what's up?</Title>
-        {items.map(({ text, checked }, i, items) => (
-          <Item
-            key={`${i}${text}`}
-            checked={checked}
-            className={i < items.length ? "mb-3" : ""}
-            text={text}
-          />
-        ))}
+        <List title="tasks">
+          {items.map(({ text, checked }, i, items) => (
+            <Item
+              key={`${i}${text}`}
+              checked={checked}
+              className={i < items.length ? "mb-3" : ""}
+              text={text}
+            />
+          ))}
+        </List>
       </main>
 
       <footer className={styles.footer}>&copy; Luca Morelli</footer>
