@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Head from "next/head";
 import { Item } from "../src/components/Item";
 import { Title } from "../src/components/Title";
@@ -12,19 +13,29 @@ const items = [
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div className="bg-indigo-50 text-indigo-900">
       <Head>
         <title>TODO List</title>
         <meta name="description" content="Manage your todo list" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <Title>TODO List</Title>
-        {items.map(({ text, checked }, i) => (
-          <Item key={`${i}${text}`} checked={checked}>
-            {text}
-          </Item>
+      <main
+        className={clsx(
+          "py-16 px-0",
+          "max-w-5xl m-auto",
+          "min-h-screen",
+          "flex flex-col"
+        )}
+      >
+        <Title>Hey, what's up?</Title>
+        {items.map(({ text, checked }, i, items) => (
+          <Item
+            key={`${i}${text}`}
+            checked={checked}
+            className={i < items.length ? "mb-3" : ""}
+            text={text}
+          />
         ))}
       </main>
 
