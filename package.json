@@ -10,15 +10,18 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.13",
+    "@types/body-scroll-lock": "^3.1.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
+    "body-scroll-lock": "^4.0.0-beta.0",
     "clsx": "^1.2.1",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "next": "13.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-focus-lock": "^2.9.2",
     "typescript": "4.9.3"
   },
   "author": "Luca Morelli <luca.morelli.lm@gmail.com>",

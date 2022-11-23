@@ -1,16 +1,20 @@
-import { PlusIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Head from "next/head";
+import React from "react";
 import { useEffect } from "react";
-import { Button } from "../src/components/button";
+import { Button } from "../src/components/Button";
 import { Item } from "../src/components/Item";
 import { List } from "../src/components/List";
+import { Modal } from "../src/components/Modal";
 import { Title } from "../src/components/Title";
 import { useItemsContext } from "../src/context/items";
+import { useModal } from "../src/context/modal";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const { items, addItem } = useItemsContext();
+  const { open: openModal, close: closeModal, isOpen } = useModal();
+  const [newTitle, setNewTitle] = React.useState<string>();
 
   useEffect(() => {
     addItem({ text: "Checked item", date: 1668792279974, checked: true });
@@ -18,6 +22,12 @@ export default function Home() {
     addItem({ text: "Unchecked item", date: 1668792298706 });
     addItem({ text: "Unchecked item" });
   }, []);
+
+  const handleAction = () => {
+    addItem({ text: newTitle });
+    setNewTitle('');
+    closeModal();
+  };
 
   return (
     <div className="bg-indigo-50 text-indigo-900">
@@ -46,7 +56,18 @@ export default function Home() {
             />
           ))}
         </List>
-        <Button tabIndex={1}>+</Button>
+        <Button tabIndex={1} onClick={openModal}>
+          +
+        </Button>
+        <Modal onClose={closeModal} onAction={handleAction} visible={isOpen}>
+          <input
+            className="w-100 p-3 pl-0 mb-3 outline-0 text-xl"
+            placeholder="Enter a new task"
+            type="text"
+            value={newTitle ?? ""}
+            onChange={({ target: { value } }) => setNewTitle(value)}
+          />
+        </Modal>
       </main>
 
       <footer className={styles.footer}>&copy; Luca Morelli</footer>
