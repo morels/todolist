@@ -1,6 +1,8 @@
+import { PlusIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Head from "next/head";
 import { useEffect } from "react";
+import { Button } from "../src/components/button";
 import { Item } from "../src/components/Item";
 import { List } from "../src/components/List";
 import { Title } from "../src/components/Title";
@@ -44,6 +46,7 @@ export default function Home() {
             />
           ))}
         </List>
+        <Button tabIndex={1}>+</Button>
       </main>
 
       <footer className={styles.footer}>&copy; Luca Morelli</footer>
