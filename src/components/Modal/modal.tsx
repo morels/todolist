@@ -31,12 +31,11 @@ const Modal = ({
         enableBodyScroll(scrollRef);
       }
     };
-  }, []);
+  }, [visible]);
 
-  return (
+  return visible ? (
     <div
       className={clsx(
-        visible ? undefined : "hidden",
         "fixed bottom-0 left-0 top-0 right-0",
         "flex flex-col items-center justify-center"
       )}
@@ -56,7 +55,7 @@ const Modal = ({
               key="close"
               type="button"
               aria-label="Close modal"
-              kind='secondary'
+              kind="secondary"
             >
               Close
             </Button>
@@ -65,7 +64,7 @@ const Modal = ({
         </FocusLock>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export { Modal };
