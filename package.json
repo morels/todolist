@@ -25,6 +25,7 @@
     "typescript": "4.9.3"
   },
   "author": "Luca Morelli <luca.morelli.lm@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",
