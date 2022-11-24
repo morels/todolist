@@ -22,7 +22,7 @@ export default function Home() {
     addItem({ text: "Checked item", date: 1668792297706, checked: true });
     addItem({ text: "Unchecked item", date: 1668792298706 });
     addItem({ text: "Unchecked item" });
-  }, []);
+  }, [addItem]);
 
   const handleAction = () => {
     addItem({ text: newTitle });
@@ -46,11 +46,11 @@ export default function Home() {
           "flex flex-col"
         )}
       >
-        <Title>Hey, what's up?</Title>
+        <Title>Hey, what&apos;s up?</Title>
         <List title="tasks">
           {items.map(({ text, checked }, i, items) => (
             <Item
-              key={`${i}${text}`}
+              key={`${i}${text}`} 
               checked={checked}
               className={i < items.length ? "mb-3" : ""}
               text={text}
