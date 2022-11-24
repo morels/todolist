@@ -57,12 +57,12 @@ export default function Home() {
             />
           ))}
         </List>
-        <Button tabIndex={1} onClick={openModal}>
-          <PlusIcon className="w-6 h-6 stroke-2"/>
+        <Button tabIndex={1} onClick={openModal} size="large">
+          <PlusIcon className="w-6 h-6 stroke-2" />
         </Button>
         <Modal onClose={closeModal} onAction={handleAction} visible={isOpen}>
           <input
-            className="w-100 p-3 pl-0 mb-3 outline-0 text-xl"
+            className="w-100 p-3 pl-0 mb-6 outline-0 text-xl"
             placeholder="Enter a new task"
             type="text"
             value={newTitle ?? ""}

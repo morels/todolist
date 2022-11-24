@@ -1,20 +1,50 @@
 import clsx from "clsx";
 import React from "react";
 
-type Props = React.ButtonHTMLAttributes<HTMLElement>;
+type ButtonKind = "primary" | "secondary";
+type Size = "regular" | "large";
 
-const Button = ({ onClick, children, ...attributes }: React.PropsWithChildren<Props>) => (
+type Props = {
+  kind?: ButtonKind;
+  size?: Size;
+} & React.ButtonHTMLAttributes<HTMLElement>;
+
+const style = {
+  primary: {
+    border: "",
+    background:
+      "bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-800",
+    text: "text-white",
+  },
+  secondary: {
+    border: "border-2 border-slate-100",
+    background:
+      "bg-white hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-200 active:border-slate-200",
+    text: "text-inherit",
+  },
+  large: "p-5",
+  regular: "p-2",
+};
+
+const Button = ({
+  onClick,
+  kind = "primary",
+  size = "regular",
+  children,
+  ...attributes
+}: React.PropsWithChildren<Props>) => (
   <a
     className={clsx(
-      "p-5 w-100",
-      "rounded-lg bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-800",
-      "cursor-pointer text-white text-2xl",
-      "flex justify-center"
+      `${style[size]} w-100`,
+      `rounded-lg ${style[kind].background} ${style[kind].border}`,
+      "flex justify-center",
+      `${style[kind].text}`,
+      "cursor-pointer"
     )}
     onClick={onClick}
     {...attributes}
   >
-    {children}
+    {typeof children === "string" ? <p>{children}</p> : children}
   </a>
 );
 

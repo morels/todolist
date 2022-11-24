@@ -56,6 +56,7 @@ const Modal = ({
               key="close"
               type="button"
               aria-label="Close modal"
+              kind='secondary'
             >
               Close
             </Button>
