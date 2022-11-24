@@ -47,7 +47,7 @@ const Modal = ({
       ref={modalRef}
     >
       <div className="absolute bottom-0 left-0 top-0 right-0 bg-white opacity-50" />
-      <div className="bg-white rounded-lg p-10 relative w-100 max-w-2xl border">
+      <div className="bg-white rounded-lg p-10 relative w-full max-w-2xl border">
         <FocusLock ref={scrollerRef} returnFocus={{ preventScroll: false }}>
           {children}
           <div className="flex gap-5 md:w-1/2 md:ml-auto">

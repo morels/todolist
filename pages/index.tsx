@@ -62,7 +62,7 @@ export default function Home() {
         </Button>
         <Modal onClose={closeModal} onAction={handleAction} visible={isOpen}>
           <input
-            className="w-100 p-3 pl-0 mb-6 outline-0 text-xl"
+            className="w-full p-3 pl-0 mb-6 outline-0 text-xl"
             placeholder="Enter a new task"
             type="text"
             value={newTitle ?? ""}

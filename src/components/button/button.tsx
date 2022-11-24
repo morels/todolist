@@ -35,7 +35,7 @@ const Button = ({
 }: React.PropsWithChildren<Props>) => (
   <a
     className={clsx(
-      `${style[size]} w-100`,
+      `${style[size]} w-full`,
       `rounded-lg ${style[kind].background} ${style[kind].border}`,
       "flex justify-center",
       `${style[kind].text}`,
