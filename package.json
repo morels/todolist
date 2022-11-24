@@ -28,6 +28,8 @@
   "author": "Luca Morelli <luca.morelli.lm@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/cli": "17.3.0",
+    "@commitlint/config-conventional": "17.3.0",
     "autoprefixer": "10.4.13",
     "husky": "8.0.2",
     "lint-staged": "13.0.3",
