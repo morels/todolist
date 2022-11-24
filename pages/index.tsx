@@ -26,7 +26,7 @@ export default function Home() {
 
   const handleAction = () => {
     addItem({ text: newTitle });
-    setNewTitle('');
+    setNewTitle("");
     closeModal();
   };
 
