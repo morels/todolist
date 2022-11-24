@@ -1,3 +1,4 @@
+import { PlusIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Head from "next/head";
 import React from "react";
@@ -57,7 +58,7 @@ export default function Home() {
           ))}
         </List>
         <Button tabIndex={1} onClick={openModal}>
-          +
+          <PlusIcon className="w-6 h-6 stroke-2"/>
         </Button>
         <Modal onClose={closeModal} onAction={handleAction} visible={isOpen}>
           <input
