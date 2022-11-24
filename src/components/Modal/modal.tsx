@@ -50,7 +50,7 @@ const Modal = ({
       <div className="bg-white rounded-lg p-10 relative w-100 max-w-2xl border">
         <FocusLock ref={scrollerRef} returnFocus={{ preventScroll: false }}>
           {children}
-          <div>
+          <div className="flex gap-5 md:w-1/2 md:ml-auto">
             <Button
               onClick={onClose}
               key="close"
