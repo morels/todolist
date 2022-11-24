@@ -11,15 +11,15 @@ type Props = {
 
 const style = {
   primary: {
-    border: "",
+    border: "border-2 border-blue-600 hover:border-blue-700 focus:border-blue-700 active:border-blue-800",
     background:
       "bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-800",
     text: "text-white",
   },
   secondary: {
-    border: "border-2 border-slate-100",
+    border: "border-2 border-slate-100 hover:border-slate-100 focus:border-slate-100 active:border-slate-200",
     background:
-      "bg-white hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-200 active:border-slate-200",
+      "bg-white hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-200",
     text: "text-inherit",
   },
   large: "p-5",
