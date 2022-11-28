@@ -13,17 +13,14 @@ import { useModal } from "../src/context/modal";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  const { items, addItem, editItem, removeItem } = useItemsContext();
+  const { items, addItem, editItem, removeItem, fetchItems } = useItemsContext();
   const { open: openModal, close: closeModal, isOpen } = useModal();
   const [newText, setNewText] = React.useState<string>("");
   const [isEditingAt, setIsEditingAt] = React.useState(-1);
 
   useEffect(() => {
-    addItem({ text: "Checked item", date: 1668792279974, checked: true });
-    addItem({ text: "Checked item", date: 1668792297706, checked: true });
-    addItem({ text: "Unchecked item", date: 1668792298706 });
-    addItem({ text: "Unchecked item" });
-  }, [addItem]);
+    fetchItems();
+  }, [fetchItems]);
 
   const handleAdd = () => {
     setIsEditingAt(-1);
