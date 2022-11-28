@@ -13,9 +13,10 @@ import { useModal } from "../src/context/modal";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  const { items, addItem } = useItemsContext();
+  const { items, addItem, editItem, removeItem } = useItemsContext();
   const { open: openModal, close: closeModal, isOpen } = useModal();
-  const [newTitle, setNewTitle] = React.useState<string>();
+  const [newText, setNewText] = React.useState<string>("");
+  const [isEditingAt, setIsEditingAt] = React.useState(-1);
 
   useEffect(() => {
     addItem({ text: "Checked item", date: 1668792279974, checked: true });
@@ -24,11 +25,39 @@ export default function Home() {
     addItem({ text: "Unchecked item" });
   }, [addItem]);
 
-  const handleAction = () => {
-    addItem({ text: newTitle });
-    setNewTitle("");
+  const handleAdd = () => {
+    setIsEditingAt(-1);
+    addItem({ text: newText });
+    setNewText("");
     closeModal();
   };
+
+  const handleNewTextChange = (text) => {
+    setNewText(text);
+  };
+
+  const handleFinishEditing = (i) => () => {
+    editItem({text: newText},i);
+    setIsEditingAt(-1);
+    setNewText("");
+  };
+  
+  const handleCheck = (i) => () => {
+    editItem({checked: !items[i].checked}, i);
+  };
+  
+  const handleStartEditing = (i) => () => {
+    setNewText(items[i].text);
+    setIsEditingAt(i);
+  }
+  
+  const handleRemove = (i) => () => {
+    removeItem(i);
+    if(isEditingAt === i){
+      setIsEditingAt(-1);
+      setNewText("");
+    }
+  }
 
   return (
     <div className="bg-indigo-50 text-indigo-900">
@@ -50,23 +79,30 @@ export default function Home() {
         <List title="tasks">
           {items.map(({ text, checked }, i, items) => (
             <Item
-              key={`${i}${text}`} 
-              checked={checked}
+              key={`${i}${text}`}
               className={i < items.length ? "mb-3" : ""}
               text={text}
+              checked={checked}
+              editing={isEditingAt === i}
+              newText={newText}
+              handleNewTextChange={handleNewTextChange}
+              handleCheck={handleCheck(i)}
+              handleStartEditing={handleStartEditing(i)}
+              handleFinishEditing={handleFinishEditing(i)}
+              handleRemove={handleRemove(i)}
             />
           ))}
         </List>
         <Button tabIndex={1} onClick={openModal} size="large">
           <PlusIcon className="w-6 h-6 stroke-2" />
         </Button>
-        <Modal onClose={closeModal} onAction={handleAction} visible={isOpen}>
+        <Modal onClose={closeModal} onAction={handleAdd} visible={isOpen}>
           <input
             className="w-full p-3 pl-0 mb-6 outline-0 text-xl"
             placeholder="Enter a new task"
             type="text"
-            value={newTitle ?? ""}
-            onChange={({ target: { value } }) => setNewTitle(value)}
+            value={newText ?? ""}
+            onChange={({ target: { value } }) => setNewText(value)}
           />
         </Modal>
       </main>
