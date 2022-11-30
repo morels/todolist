@@ -9,7 +9,7 @@ import { Title } from "../Title";
 import { useItemsContext } from "../../context/items";
 import { useModal } from "../../context/modal";
 
-const UserDashobard = () => {
+const UserDashboard = () => {
   const { items, addItem, editItem, removeItem, fetchItems } = useItemsContext();
   const { open: openModal, close: closeModal, isOpen } = useModal();
   const [newText, setNewText] = React.useState<string>("");
@@ -89,4 +89,4 @@ const UserDashobard = () => {
   );
 }
 
-export {UserDashobard};
+export { UserDashboard };

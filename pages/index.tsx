@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import { Footer } from "../src/components/Footer";
-import { UserDashobard } from "../src/components/UserDashboard/user-dashboard";
+import { UserDashboard } from "../src/components/UserDashboard";
 
 export default function Home() {
   const styles = {
@@ -17,7 +17,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <UserDashobard />
+        <UserDashboard />
       </main>
 
       <Footer />
