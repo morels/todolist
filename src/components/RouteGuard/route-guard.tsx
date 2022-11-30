@@ -1,4 +1,3 @@
-// Taken from https://jasonwatmore.com/post/2021/08/30/next-js-redirect-to-login-page-if-unauthenticated
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { allowedPaths } from '../../../config';
