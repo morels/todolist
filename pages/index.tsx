@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import { Header } from "../src/components/Header";
 import { Footer } from "../src/components/Footer";
 import { UserDashboard } from "../src/components/UserDashboard";
 
@@ -16,6 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Header />
       <main className={styles.main}>
         <UserDashboard />
       </main>
