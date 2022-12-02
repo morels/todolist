@@ -1,9 +1,9 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { ItemsProvider } from "../src/context/items";
-import { ModalProvider } from "../src/context/modal";
-import { RouteGuard } from "../src/components/RouteGuard";
-import { AuthProvider } from "../src/context/auth";
+import { ItemsProvider } from "context/items";
+import { ModalProvider } from "context/modal";
+import { RouteGuard } from "components/RouteGuard";
+import { AuthProvider } from "context/auth";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -11,6 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <RouteGuard>
         <ModalProvider>
           <ItemsProvider>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
             <Component {...pageProps} />
           </ItemsProvider>
         </ModalProvider>

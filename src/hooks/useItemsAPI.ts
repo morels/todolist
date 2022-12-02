@@ -1,7 +1,7 @@
 import React from "react";
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
-import { useAuth } from "../context/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useAuth } from "context/auth";
+import { db } from "../../firebase";
 
 export type Item = {
   text: string;
@@ -10,58 +10,53 @@ export type Item = {
 };
 
 type Hook = {
-  addItem: (_: Item[]) => void;
-  removeItem: (_: Item[]) => void;
-  editItem: (_: Item[]) => void;
+  addItem: (_: Item[]) => ReturnType<typeof setDoc>;
+  removeItem: (_: Item[]) => ReturnType<typeof setDoc>;
+  editItem: (_: Item[]) => ReturnType<typeof setDoc>;
   fetchItems: () => Promise<Item[]>;
 };
 
 const useItemsAPI = () => {
   const { currentUser } = useAuth();
-  
+
   const addItem: Hook["addItem"] = React.useCallback(async (items) => {
-    // @ts-expect-error
-    // Expect missing signature for doc method as currentUser formally can be undefined
-    const userRef = doc(db, 'users', currentUser.uid);    
+    // @ts-expect-error Formally 'currentUser' is possibly 'null'.ts(18047)
+    const userRef = doc(db, "users", currentUser.uid);
     return setDoc(userRef, {
-      'todos': items
-    }, { merge: true })
-  }, [currentUser]);
-  
-  const removeItem: Hook["removeItem"] = React.useCallback(async (items) => {
-    // @ts-expect-error
-    // Expect missing signature for doc method as currentUser formally can be undefined
-    const userRef = doc(db, 'users', currentUser.uid);
-    return setDoc(userRef, {
-      'todos': items
-    }, { merge: true })
-  }, [currentUser]);
-  
-  const editItem: Hook["editItem"] = React.useCallback(async(items) => {
-    // @ts-expect-error
-    // Expect missing signature for doc method as currentUser formally can be undefined
-    const userRef = doc(db, 'users', currentUser.uid);
-    return setDoc(userRef, {
-      'todos': items
-    }, { merge: true })
+      todos: items,
+    }, { merge: true });
   }, [currentUser]);
 
-  const fetchItems: Hook['fetchItems'] = React.useCallback(async () => {
-    // @ts-expect-error
-    // Expect missing signature for doc method as currentUser formally can be undefined
-    const userRef = doc(db, 'users', currentUser.uid);
+  const removeItem: Hook["removeItem"] = React.useCallback(async (items) => {
+    // @ts-expect-error Formally 'currentUser' is possibly 'null'.ts(18047)
+    const userRef = doc(db, "users", currentUser.uid);
+    return setDoc(userRef, {
+      todos: items,
+    }, { merge: true });
+  }, [currentUser]);
+
+  const editItem: Hook["editItem"] = React.useCallback(async (items) => {
+    // @ts-expect-error Formally 'currentUser' is possibly 'null'.ts(18047)
+    const userRef = doc(db, "users", currentUser.uid);
+    return setDoc(userRef, {
+      todos: items,
+    }, { merge: true });
+  }, [currentUser]);
+
+  const fetchItems: Hook["fetchItems"] = React.useCallback(async () => {
+    // @ts-expect-error Formally 'currentUser' is possibly 'null'.ts(18047)
+    const userRef = doc(db, "users", currentUser.uid);
     try {
-      const userSnapshot = await getDoc(userRef)
+      const userSnapshot = await getDoc(userRef);
       if (userSnapshot.exists()) {
         return Promise.resolve(userSnapshot.data().todos);
-      } else {
-        return Promise.resolve([]);
       }
+      return Promise.resolve([]);
     } catch (err) {
-      return Promise.reject("Failed to load data");
+      return Promise.reject(new Error("Failed to load data"));
     }
-  },[currentUser]);
-  
+  }, [currentUser]);
+
   return {
     addItem,
     removeItem,
@@ -70,6 +65,6 @@ const useItemsAPI = () => {
   };
 };
 
-export type {Item as ItemType};
+export type { Item as ItemType };
 
 export { useItemsAPI };

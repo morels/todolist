@@ -1,14 +1,13 @@
 import Head from "next/head";
-import React from "react";
-import { Header } from "../src/components/Header";
-import { Footer } from "../src/components/Footer";
-import { UserDashboard } from "../src/components/UserDashboard";
+import { Header } from "components/Header";
+import { Footer } from "components/Footer";
+import { UserDashboard } from "components/UserDashboard";
 
 export default function Home() {
   const styles = {
-    main: "py-16 px-0 max-w-5xl m-auto min-h-screen"
+    main: "py-16 px-0 max-w-5xl m-auto min-h-screen",
   };
-  
+
   return (
     <div className="bg-indigo-50 text-indigo-900">
       <Head>
@@ -23,7 +22,7 @@ export default function Home() {
       </main>
 
       <Footer />
-      
+
     </div>
   );
 }

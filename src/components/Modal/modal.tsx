@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { Button } from "../Button";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import FocusLock from "react-focus-lock";
 import clsx from "clsx";
+import { Button } from "../Button";
 
 type Modal = {
   visible?: boolean;
@@ -37,7 +37,7 @@ const Modal = ({
     <div
       className={clsx(
         "fixed bottom-0 left-0 top-0 right-0",
-        "flex flex-col items-center justify-center"
+        "flex flex-col items-center justify-center",
       )}
       role="dialog"
       aria-modal="true"
@@ -53,7 +53,6 @@ const Modal = ({
             <Button
               onClick={onClose}
               key="close"
-              type="button"
               aria-label="Close modal"
               kind="secondary"
             >

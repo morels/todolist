@@ -5,9 +5,10 @@ type ButtonKind = "primary" | "secondary";
 type Size = "regular" | "large";
 
 type Props = {
-  kind?: ButtonKind;
-  size?: Size;
-} & React.ButtonHTMLAttributes<HTMLElement>;
+  kind?: ButtonKind | undefined;
+  size?: Size| undefined;
+} & React.DOMAttributes<HTMLButtonElement>
+  & React.HTMLAttributes<HTMLButtonElement>;
 
 const style = {
   primary: {
@@ -33,19 +34,21 @@ const Button = ({
   children,
   ...attributes
 }: React.PropsWithChildren<Props>) => (
-  <a
+  <button
+    type="button"
     className={clsx(
       `${style[size]} w-full`,
       `rounded-lg ${style[kind].background} ${style[kind].border}`,
       "flex justify-center",
       `${style[kind].text}`,
-      "cursor-pointer"
+      "cursor-pointer",
     )}
     onClick={onClick}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...attributes}
   >
     {typeof children === "string" ? <p>{children}</p> : children}
-  </a>
+  </button>
 );
 
 export { Button };

@@ -1,22 +1,30 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
-import React from "react";
-import { useEffect } from "react";
-import { Button } from "../Button";
-import { Item } from "../Item";
-import { List } from "../List";
-import { Modal } from "../Modal";
+import React, { useEffect } from "react";
+import { Button } from "components/Button";
+import { Item } from "components/Item";
+import { List } from "components/List";
+import { Modal } from "components/Modal";
+import { useItemsContext } from "context/items";
+import { useModal } from "context/modal";
 import { Title } from "../Title";
-import { useItemsContext } from "../../context/items";
-import { useModal } from "../../context/modal";
 
 const UserDashboard = () => {
-  const { items, addItem, editItem, removeItem, fetchItems } = useItemsContext();
+  const {
+    items, addItem, editItem, removeItem, fetchItems,
+  } = useItemsContext();
   const { open: openModal, close: closeModal, isOpen } = useModal();
   const [newText, setNewText] = React.useState<string>("");
   const [isEditingAt, setIsEditingAt] = React.useState(-1);
 
   useEffect(() => {
-    fetchItems();
+    async function effect() {
+      try {
+        await fetchItems();
+      } catch (err) {
+        /* empty */
+      }
+    }
+    effect();
   }, [fetchItems]);
 
   const handleAdd = () => {
@@ -26,67 +34,69 @@ const UserDashboard = () => {
     closeModal();
   };
 
-  const handleNewTextChange = (text) => {
+  const handleNewTextChange = (text:string) => {
     setNewText(text);
   };
 
-  const handleFinishEditing = (i) => () => {
-    editItem({text: newText},i);
+  const handleFinishEditing = (i:number) => () => {
+    editItem({ text: newText }, i);
     setIsEditingAt(-1);
     setNewText("");
   };
-  
-  const handleCheck = (i) => () => {
-    editItem({checked: !items[i].checked}, i);
+
+  const handleCheck = (i:number) => () => {
+    editItem({ checked: !items[i].checked }, i);
   };
-  
-  const handleStartEditing = (i) => () => {
+
+  const handleStartEditing = (i:number) => () => {
     setNewText(items[i].text);
     setIsEditingAt(i);
-  }
-  
-  const handleRemove = (i) => () => {
+  };
+
+  const handleRemove = (i:number) => () => {
     removeItem(i);
-    if(isEditingAt === i){
+    if (isEditingAt === i) {
       setIsEditingAt(-1);
       setNewText("");
     }
-  }
+  };
 
   return (
-      <div className={"flex flex-col"} >
-        <Title>Hey, what&apos;s up?</Title>
-        <List title="tasks">
-          {items.map(({ text, checked }, i, items) => (
-            <Item
-              key={`${i}${text}`}
-              className={i < items.length ? "mb-3" : ""}
-              text={text}
-              checked={checked}
-              editing={isEditingAt === i}
-              newText={newText}
-              handleNewTextChange={handleNewTextChange}
-              handleCheck={handleCheck(i)}
-              handleStartEditing={handleStartEditing(i)}
-              handleFinishEditing={handleFinishEditing(i)}
-              handleRemove={handleRemove(i)}
-            />
-          ))}
-        </List>
-        <Button tabIndex={1} onClick={openModal} size="large">
-          <PlusIcon className="w-6 h-6 stroke-2" />
-        </Button>
-        <Modal onClose={closeModal} onAction={handleAdd} visible={isOpen}>
-          <input
-            className="w-full p-3 pl-0 mb-6 outline-0 text-xl"
-            placeholder="Enter a new task"
-            type="text"
-            value={newText ?? ""}
-            onChange={({ target: { value } }) => setNewText(value)}
+    <div className="flex flex-col">
+      <Title>Hey, what&apos;s up?</Title>
+      <List title="tasks">
+        {items.map(({ text, checked }, i) => (
+          <Item
+            // eslint-disable-next-line react/no-array-index-key
+            key={`${i}-${text}`}
+            className={i < items.length ? "mb-3" : ""}
+            text={text}
+            checked={checked}
+            editing={isEditingAt === i}
+            newText={newText}
+            handleNewTextChange={handleNewTextChange}
+            handleCheck={handleCheck(i)}
+            handleStartEditing={handleStartEditing(i)}
+            handleFinishEditing={handleFinishEditing(i)}
+            handleRemove={handleRemove(i)}
           />
-        </Modal>
+        ))}
+      </List>
+      {/* eslint-disable-next-line */}
+      <Button tabIndex={1} onClick={openModal} size="large">
+        <PlusIcon className="w-6 h-6 stroke-2" />
+      </Button>
+      <Modal onClose={closeModal} onAction={handleAdd} visible={isOpen}>
+        <input
+          className="w-full p-3 pl-0 mb-6 outline-0 text-xl"
+          placeholder="Enter a new task"
+          type="text"
+          value={newText || ""}
+          onChange={({ target: { value } }) => setNewText(value)}
+        />
+      </Modal>
     </div>
   );
-}
+};
 
 export { UserDashboard };

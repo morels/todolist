@@ -23,4 +23,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
 ## Design
-Inspiration taken from [Alex Arutuynov][https://dribbble.com/alex_arutuynov] on [Dribble](https://dribbble.com/shots/14100356-ToDo-App-UI)
+Inspiration taken from [Alex Arutuynov](https://dribbble.com/alex_arutuynov) on [Dribble](https://dribbble.com/shots/14100356-ToDo-App-UI)

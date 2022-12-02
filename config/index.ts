@@ -1,1 +1,2 @@
-export const allowedPaths = ['/login'];
+// eslint-disable-next-line import/prefer-default-export
+export const allowedPaths = ["/login"];

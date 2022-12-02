@@ -15,13 +15,16 @@ const ModalProvider = ({ children }: React.PropsWithChildren) => {
 
   const close = () => setIsOpen(false);
 
+  const value = React.useMemo(() => ({ open, close, isOpen }), [isOpen]);
+
   return (
-    <ModalContext.Provider value={{ open, close, isOpen }}>
+    <ModalContext.Provider value={value}>
       {children}
     </ModalContext.Provider>
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const useModal = () => React.useContext(ModalContext)!;
 
 export { ModalProvider, useModal };
